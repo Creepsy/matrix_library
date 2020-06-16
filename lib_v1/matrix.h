@@ -295,7 +295,7 @@ namespace ml
     std::ostream& operator<<(std::ostream& stream, const matrix<t>& ma) {
         stream << '[' << std::endl;
         for(size_t y = 0; y < ma.h; y++){
-            stream << "\t[";
+            stream << "  [";
             for(size_t x = 0; x < ma.w; x++){
                 stream << ma.at(x, y);
                 if(x != ma.w - 1) stream << ", ";
