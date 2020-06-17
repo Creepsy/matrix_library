@@ -20,6 +20,7 @@ namespace extended{
 
 		matrix();
 		matrix(const size_t &rowCount, const size_t &rowSize) : data(rowCount*rowSize), rowSize(rowSize){}//constructor only allocates memory to initialize use assign or push
+		matrix(const size_t &size) : data(size){}
 		~matrix();//do nothing data already deallocates memory
 		matrix(      matrix<T> &&other) : data(std::move(other.data)), rowSize(std::move(other.rowSize)){}
 		matrix(const matrix<T>  &other) : data(other.data), rowSize(other.rowSize);
@@ -48,8 +49,8 @@ namespace extended{
 		const size_t& row_size () const { return rowSize; }
 		const size_t& row_count() const { return data.max_size()/row_size; }
 
-		template<typename to, typename from = T>
-		cast();//TODO src code for this block
+		template<typename to>
+		matrix<to>& cast();//TODO src code for this block
 		void resize(const size_t rowCount, const size_t rowSize);
 			  T* dataPtr()       {return data.get_ValPtr(); }
 		const T* dataPtr() const {return data.get_ValPtr(); }
