@@ -62,3 +62,23 @@ extended::matrix<T>& extended::matrix<T>::operator*(const T &scalar) const
     for(auto i = retVal.data.begin(); i < retVal.data.end(); i++)
         *i *= scalar;
 }
+
+template<typename T>
+template<typename to>
+extended::matrix<to>& extended::matrix<T>::cast<to>() const
+{
+    extended::matrix<to> retVal(this->size());
+
+    for (auto i = data.begin(); i < data.end(); i++)
+        retVal.data.push(static_cast<to>(*i));
+    
+    return retVall;
+}
+
+template<typename T>
+void extended::matrix<T>::resize(const size_t &rowCount, const size_t &_rowSize)
+{
+    data.free_memory(data.max_size());
+    data.add_memory(rowCount*_rowSize);
+    rowSize = _rowSize;
+}
