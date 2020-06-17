@@ -28,7 +28,7 @@ namespace extended{
 		T& operator()(const size_t &row, const size_t &index){ return data[(row*rowSize)+index]; }
 		const T& operator()(const size_t &row, const size_t &index) const { return data[(row*rowSize)+index]; }
 
-		matrix<T>& operator+(const matrix<T> &other) const;//TODO src code for this block
+		matrix<T>& operator+(const matrix<T> &other) const;
 		matrix<T>& operator-(const matrix<T> &other) const;
 		matrix<T>& operator*(const matrix<T> &other) const;
 		matrix<T>& operator*(const T        &scalar) const;//scalar multiplication
@@ -50,14 +50,14 @@ namespace extended{
 		const size_t& row_count() const { return data.max_size()/row_size; }
 
 		template<typename to>
-		matrix<to>& cast();//TODO src code for this block
-		void resize(const size_t rowCount, const size_t rowSize);
+		matrix<to>& cast() const; //TODO src code for this block
+		void resize(const size_t &rowCount, const size_t &rowSize);// deletes all data from the matrix
 			  T* dataPtr()       {return data.get_ValPtr(); }
 		const T* dataPtr() const {return data.get_ValPtr(); }
 		inline const size_t size()     const { return data.size()    ; }
 		inline const size_t max_size() const { return data.max_size(); }
 		template<typename... args>
-		inline void fill(args &...arguments){ data.assign<args>(max_size(), const args &...arguments); }//if it isnt trivially_default_constructible it wont do anythingn this function has to be called before using the matrix
+		inline void fill(args &...arguments){ data.assign<args>(this->max_size()-size(), const args &...arguments); }//if it isnt trivially_default_constructible arguments arent used
 
 		//iterator functions
 		inline extended::vector<T>::normal_iterator begin (){ return data.begin (); }
