@@ -5,8 +5,8 @@ to work this library requires additional Software https://gitlab.com/calvinreu/v
 
 [![AGPL-3.0 License](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl.html)
 
-Libraries
-Copyright (C) 2019 Calvin Reu
+matrix
+Copyright (C) 2020 Calvin Reu
 
 SPDX-License-Identifier: AGPL-3.0
 
