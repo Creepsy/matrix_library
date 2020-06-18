@@ -10,11 +10,15 @@ int main() {
         {1, 0, 2},
     };
 
-    ml::matrix<float> b = {
+    const ml::matrix<float> b = {
         {1, 2},
         {0, 1},
         {4, 0}
     };
+
+    for(const float& f : b){
+        std::cout << f << std::endl;
+    }
 
     std::cout << a % b << std::endl;
     return 0;
