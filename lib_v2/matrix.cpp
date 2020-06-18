@@ -1,6 +1,30 @@
 #include "matrix.h"
 
 template<typename T>
+extended::matrix<T>::matrix(const std::initializer_list<std::initializer_list<T>> initData) : data(initData.size())
+{
+
+    for(auto iRow = initData.begin(); iRow < initData.end(); iRow++)
+        for (auto i = iRow->begin(); i < iRow->end(); i++)
+            data.push(*i);
+    
+    rowSize = initData.begin()->size();
+}
+
+template<typename T>
+void extended::matrix<T>::operator=(const std::initializer_list<std::initializer_list<T>> initData)
+{
+    data.free_memory(data.max_size());
+    data.add_memory(initData.size());
+
+    for(auto iRow = initData.begin(); iRow < initData.end(); iRow++)
+        for (auto i = iRow->begin(); i < iRow->end(); i++)
+            data.push(*i);
+    
+    rowSize = initData.begin()->size();
+}
+
+template<typename T>
 extended::matrix<T>& extended::matrix<T>::operator+(const extended::matrix<T> &other) const
 {
     if(data.size() != other.data.size() || rowSize != other.rowSize)

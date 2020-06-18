@@ -15,12 +15,24 @@ namespace extended{
 		extended::vector<T> data;
 		size_t rowSize;
 		inline const T& operator[](const size_t &index) const { return data[index]; }
+
+		template<typename t = T>
+		inline typename std::enable_if<!std::is_trivially_copy_constructible<t>::value>::type
+			copy(const T* source, T* destination, const size_t &size) { memcpy(destination, source, size*sizeof(T)); }
+
+		template<typename t = T>
+		inline typename std::enable_if<std::is_trivially_copy_constructible<t>::value>::type
+			copy(const T* source, T* destination, const size_t &size){
+				for (size_t i = 0; i < size; i++)
+					new(destination + i) T(source[i]);
+			}
  
 	public:
 
 		matrix();
 		matrix(const size_t &rowCount, const size_t &rowSize) : data(rowCount*rowSize), rowSize(rowSize){}//constructor only allocates memory to initialize use assign or push
 		matrix(const size_t &size) : data(size){}
+		matrix(const std::initializer_list<std::initializer_list<T>> initData);
 		~matrix();//do nothing data already deallocates memory
 		matrix(      matrix<T> &&other) : data(std::move(other.data)), rowSize(std::move(other.rowSize)){}
 		matrix(const matrix<T>  &other) : data(other.data), rowSize(other.rowSize);
@@ -41,10 +53,11 @@ namespace extended{
 		void operator*=(const T          &other){ *this = (*this) * other; }
 		//void operator/=(const matrix<T>  &other){ *this = (*this) / other; } //not sure if usefull or what it should do
 
-		void operator= (const matrix<T>  &other){ data = other.data;
+		void operator=(const matrix<T>  &other){ data = other.data;
 												  rowSize = other.rowSize; }
-		void operator= (	  matrix<T> &&other){ data = std::move(other.data);
+		void operator=(	  matrix<T> &&other){ data = std::move(other.data);
 												  rowSize = std::move(other.rowSize); }
+		void operator=(const std::initializer_list<std::initializer_list<T>> initData);
 
 		const size_t& row_size () const { return rowSize; }
 		const size_t& row_count() const { return data.max_size()/row_size; }
