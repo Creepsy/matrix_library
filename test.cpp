@@ -2,7 +2,7 @@
 #include <vector>
 #include <random>
 
-#include "lib_v1/matrix.h"
+#include "lib_v1/malib.h"
 
 int main() {
     ml::matrix<float> a = {
