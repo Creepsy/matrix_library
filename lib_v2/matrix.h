@@ -30,7 +30,7 @@ namespace extended{
 	public:
 
 		matrix();
-		matrix(const size_t &rowCount, const size_t &rowSize) : data(rowCount*rowSize), rowSize(rowSize){}//constructor only allocates memory to initialize use assign or push
+		matrix(const size_t &rowCount, const size_t &rowSize) : data(rowCount*rowSize), rowSize(rowSize){}//constructor only allocates memory to initialize fill operator = also works but will destroy the matrix first
 		matrix(const size_t &size) : data(size){}
 		matrix(const std::initializer_list<std::initializer_list<T>> initData);
 		~matrix();//do nothing data already deallocates memory
