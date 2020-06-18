@@ -1,6 +1,10 @@
 gccV := $(shell gcc -dumpversion)
 libV := "lib_v2"
 
+matrix:
+	g++ matrix.cpp -o fail
+# fix weird behaviour
+
 install: matrix.h matrix.cpp matrix
 		mkdir -p /usr/include/c++/$(gccV)/extended
 		cp $(libV)/matrix /usr/include/c++/$(gccV)/extended
