@@ -1,6 +1,8 @@
 #pragma once
 #include <extended/vector>
 #include <memory>
+#include <error.h>
+#include <initializer_list>
 #include <new>
 #include <iostream>
 #include <string.h>
